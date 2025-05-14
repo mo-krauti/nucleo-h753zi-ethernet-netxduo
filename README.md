@@ -33,14 +33,9 @@ Run `just` to list the available commands.
 The stm32 ip addresses is statically configured to `192.168.82.1` to avoid clashes with common subnets. 
 So set your host pc to `192.168.82.2` or another address in the subnet.
 
-### NetXDuo startup delay
+### ThreadX startup delay
 
-I noticed that the ethernet only works if there is a slight delay at the start of the `MX_NetXDuo_Init` function in [app_netxduo.c](NetXDuo/App/app_netxduo.c). 
-I initially achieved this using a breakpoint in the debugger and then tried using `HAL_Delay()`. 
-This HAL function will not work because it interferes with the ThreadX RTOS. 
-`tx_thread_sleep` from ThreadX can only be called from threads, but we are still in the initialization code. 
-Then I tried using `tx_get_time`, but this always returns 0 at this point, so also not available yet. 
-That is why I implemented a busy wait function called `busy_cycle_sleep_ms` which works just fine. 
+I noticed that ethernet on NetXDuo only works if there is a slight delay before starting ThreadX via `MX_ThreadX_Init` [main.c](Core/Src/main.c) 
 
 ### linker and MPU configuration
 

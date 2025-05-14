@@ -131,6 +131,8 @@ int main(void)
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  // wait for ethernet, otherwise it will not work
+  HAL_Delay(2000);
   /* USER CODE END 2 */
 
   MX_ThreadX_Init();

@@ -53,16 +53,6 @@ NX_IP          NetXDuoEthIpInstance;
 static VOID nx_app_thread_entry (ULONG thread_input);
 /* USER CODE BEGIN PFP */
 
-#define SLEEP_CLOCK_SPEED_HZ 400000000
-double cycles_per_millisecond = SLEEP_CLOCK_SPEED_HZ / 1000.0;
-
-// this calculation is inaccurate
-static void busy_cycle_sleep_ms(ULONG milliseconds) {
-  LONG sleep_cycles = milliseconds * cycles_per_millisecond;
-  for (LONG a=0; a<sleep_cycles; a++) {
-    asm("NOP");
-  }
-}
 /* USER CODE END PFP */
 
 /**
@@ -82,8 +72,6 @@ UINT MX_NetXDuo_Init(VOID *memory_ptr)
   /* USER CODE BEGIN 0 */
 
   printf("starting NetXDuo");
-  // wait for ethernet, otherwise it will not work
-  busy_cycle_sleep_ms(500);
 
   /* USER CODE END 0 */
 
