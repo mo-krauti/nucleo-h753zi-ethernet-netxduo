@@ -75,3 +75,4 @@ Release
 .settings
 cmake_build
 .gdb_history
+.gdbinit

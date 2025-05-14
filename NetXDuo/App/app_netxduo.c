@@ -55,6 +55,8 @@ static VOID nx_app_thread_entry (ULONG thread_input);
 
 #define SLEEP_CLOCK_SPEED_HZ 400000000
 double cycles_per_millisecond = SLEEP_CLOCK_SPEED_HZ / 1000.0;
+
+// this calculation is inaccurate
 static void busy_cycle_sleep_ms(ULONG milliseconds) {
   LONG sleep_cycles = milliseconds * cycles_per_millisecond;
   for (LONG a=0; a<sleep_cycles; a++) {

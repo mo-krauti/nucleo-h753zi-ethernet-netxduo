@@ -2,28 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "cppdbg openocd",
-      "type": "cppdbg",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "program": "${workspaceFolder}/build/Debug/nucleo-h753zi-ethernet-netxduo.elf",
-      "MIMode": "gdb",
-      "miDebuggerPath": "arm-none-eabi-gdb",
-      "miDebuggerServerAddress": "localhost:3333",
-      "debugServerPath": "openocd",
-      "debugServerArgs": "-f board/st_nucleo_h743zi.cfg -c \"$_CHIPNAME.cpu0 configure -rtos auto\"",
-      "serverStarted": "Listening on port .* for gdb connections",
-      "filterStderr": true,
-      "stopAtEntry": true,
-      "hardwareBreakpoints": {
-        "require": true,
-        "limit": 8
-      },
-      "preLaunchTask": "Flash",
-      "svdPath": "${workspaceFolder}/STM32H753.svd"
-    },
-
-    {
       "name": "Cortex Debug OpenOCD",
       "type": "cortex-debug",
       "request": "launch",
@@ -49,5 +27,26 @@
       "svdFile": "${workspaceFolder}/STM32H753.svd",
       "showDevDebugOutput": "raw"
     },
+    {
+      "name": "cppdbg openocd",
+      "type": "cppdbg",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/build/Debug/nucleo-h753zi-ethernet-netxduo.elf",
+      "MIMode": "gdb",
+      "miDebuggerPath": "arm-none-eabi-gdb",
+      "miDebuggerServerAddress": "localhost:3333",
+      "debugServerPath": "openocd",
+      "debugServerArgs": "-f board/st_nucleo_h743zi.cfg -c \"$_CHIPNAME.cpu0 configure -rtos auto\"",
+      "serverStarted": "Listening on port .* for gdb connections",
+      "filterStderr": true,
+      "stopAtEntry": true,
+      "hardwareBreakpoints": {
+        "require": true,
+        "limit": 8
+      },
+      "preLaunchTask": "Flash",
+      "svdPath": "${workspaceFolder}/STM32H753.svd"
+    }
   ]
 }
