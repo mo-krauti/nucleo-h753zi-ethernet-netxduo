@@ -24,7 +24,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,6 +53,14 @@ NX_IP          NetXDuoEthIpInstance;
 static VOID nx_app_thread_entry (ULONG thread_input);
 /* USER CODE BEGIN PFP */
 
+#define SLEEP_CLOCK_SPEED_HZ 400000000
+double cycles_per_millisecond = SLEEP_CLOCK_SPEED_HZ / 1000.0;
+static void busy_cycle_sleep_ms(ULONG milliseconds) {
+  LONG sleep_cycles = milliseconds * cycles_per_millisecond;
+  for (LONG a=0; a<sleep_cycles; a++) {
+    asm("NOP");
+  }
+}
 /* USER CODE END PFP */
 
 /**
@@ -71,6 +78,10 @@ UINT MX_NetXDuo_Init(VOID *memory_ptr)
   /* USER CODE END MX_NetXDuo_MEM_POOL */
 
   /* USER CODE BEGIN 0 */
+
+  printf("starting NetXDuo");
+  // wait for ethernet, otherwise it will not work
+  busy_cycle_sleep_ms(500);
 
   /* USER CODE END 0 */
 
@@ -196,7 +207,12 @@ UINT MX_NetXDuo_Init(VOID *memory_ptr)
 static VOID nx_app_thread_entry (ULONG thread_input)
 {
   /* USER CODE BEGIN Nx_App_Thread_Entry 0 */
-
+  while (1) {
+    printf("NetXDuo Thread");
+    ULONG time = tx_time_get();
+    printf("%ld", time);
+    tx_thread_sleep(1000);
+  }
   /* USER CODE END Nx_App_Thread_Entry 0 */
 
 }
